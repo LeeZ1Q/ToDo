@@ -12,7 +12,7 @@ function App() {
       title: '\u{1F31E} Today',
       ['To Do']: [],
       ['In Progress']: [],
-      ['Done \u{2705}']: [],
+      ['Done']: [],
     },
   ], []);
 

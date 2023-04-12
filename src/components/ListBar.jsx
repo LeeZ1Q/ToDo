@@ -1,6 +1,5 @@
 import React, {useCallback} from 'react';
 
-
 const ListBar = ({ lists, setLists, currentList, setCurrentList}) => {
     const handleAdd = useCallback(() => {
       const title = prompt('Enter the Title');
@@ -27,7 +26,7 @@ const ListBar = ({ lists, setLists, currentList, setCurrentList}) => {
     return (
       <div className='list-bar'>
         <h1 className='list-bar-title'>
-          <img className='list-bar-logo' src = './todo.svg'></img>
+          <img className='list-bar-logo' src = '/todo.svg'></img>
           ToDo
         </h1>
         <AddlistButton handleClick ={handleAdd} />

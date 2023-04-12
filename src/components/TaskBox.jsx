@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Column from './Column';
 
-
 const TaskBox = ({ lists, setLists, currentList, setCurrentList}) => {
     const handleRemove = useCallback(() => {
         if (confirm('You really want to remove it?')) {
@@ -29,29 +28,24 @@ const TaskBox = ({ lists, setLists, currentList, setCurrentList}) => {
           });
         }
       }, [lists, setLists, currentList, setCurrentList]);
-    
-     const handleDragEnd = useCallback((result) => {
-        if (!result.destination) return;
-        const { source, destination } = result;
-        const curList = lists.find((item) => item.title === currentList.title);
-        const taskCopy = curList[source.droppableId][source.index];
+    const handleDragEnd = useCallback((result) => {
+    if (!result.destination) return;
+    const { source, destination } = result;
+    const curList = lists.find((item) => item.title === currentList.title);
+    const taskCopy = curList[source.droppableId][source.index];
         setLists((prev) => 
             prev.map((list) => {
                 if (list.title === currentList.title) {
-                    let listCopy = { ...list };
-                    const taskListSource = listCopy[source.droppableId];
-                    taskListSource.splice(source.index, 1);
-                    listCopy = { ...list, [source.droppableId]: taskListSource };
-                        const taskListDestination = listCopy[destination.droppableId];
-                    taskListDestination.splice(destination.index, 0, taskCopy);
-                    listCopy = { ...list, [destination.droppableId]: taskListDestination };
+                    const listCopy = {...list};
+                    listCopy[source.droppableId].splice(source.index, 1);
+                    listCopy[destination.droppableId].splice(destination.index, 0, taskCopy);
                     return listCopy;
                 } else{ 
                     return list;
                 }
             })
         );
-     }, [lists, setLists, currentList]); 
+    }, [lists, setLists, currentList]); 
 
     return (
         <div className='task-box'>
