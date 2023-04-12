@@ -1,16 +1,18 @@
 import './App.css'
 import './components/list.css';
+import './components/task.css';
 import { useState, useCallback, useMemo, useEffect } from 'react'
 import ListBar from './components/ListBar';
+import TaskBox from './components/TaskBox';
 
 
 function App() {
   const initList = useMemo(() => [
     {
-      title: '\u{1F31E} My day',
+      title: '\u{1F31E} Today',
       ['To Do']: [],
       ['In Progress']: [],
-      ['Done']: [],
+      ['Done \u{2705}']: [],
     },
   ], []);
 
@@ -43,6 +45,12 @@ function App() {
   return (
     <div className="App">
       <ListBar 
+        lists = {lists}
+        setLists = {setLists}
+        currentList = {currentList}
+        setCurrentList = {setCurrentList}
+      />
+      <TaskBox 
         lists = {lists}
         setLists = {setLists}
         currentList = {currentList}

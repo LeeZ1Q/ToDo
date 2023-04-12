@@ -10,7 +10,7 @@
 
 .list-container {
   height: 700px;
-  padding: 0 30px;
+  padding: 10px 30px;
   overflow: auto;
 }
 
@@ -28,13 +28,17 @@
 
 .list:hover {
   color: #fff;
-  background-color: #e86b3dc4;
+  background-color:#feaf46;
   transition: 0.5s;
+  box-shadow:  5px 5px 5px #e59e3f,
+               0px 0px 0px #ffc14d;
 }
 
 .selected-list {
   color: #fff;
-  background-color: #e86a3d;
+  background-color: #ef7d36;
+  box-shadow:   5px 5px 5px #d77131,
+                0px 0px 0px #ff8a3b;
 }
 
 .over-hide {

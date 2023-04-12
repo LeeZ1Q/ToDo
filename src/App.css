@@ -15,6 +15,7 @@
   flex: 1;
   min-width: 1070px;
   background-color: #fefefe;
+  height: 100vh;
 }
 
 .add-button {
@@ -30,6 +31,8 @@
   cursor: pointer;
   transition: 0.5s;
   outline: none;
+  box-shadow:   5px 5px 10px #c9cfce,
+                -5px -5px 10px #ffffff;
 }
 
 .add-button:hover {
