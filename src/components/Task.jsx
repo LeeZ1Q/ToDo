@@ -1,7 +1,10 @@
-const Task = ({ name, details, id, handleRemove, handleEdit }) => {
+const Task = ({ name, details, id, handleRemove, handleEdit, provided }) => {
   return (
     <div
       className='task'
+      ref={provided.innerRef}
+      {...provided.draggableProps}
+      {...provided.dragHandleProps}
       onClick={() => handleEdit(id)}
     >
       <h2 className='task-name over-hide'>{name}</h2>

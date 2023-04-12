@@ -29,6 +29,29 @@ const TaskBox = ({ lists, setLists, currentList, setCurrentList}) => {
           });
         }
       }, [lists, setLists, currentList, setCurrentList]);
+    
+     const handleDragEnd = useCallback((result) => {
+        if (!result.destination) return;
+        const { source, destination } = result;
+        const curList = lists.find((item) => item.title === currentList.title);
+        const taskCopy = curList[source.droppableId][source.index];
+        setLists((prev) => 
+            prev.map((list) => {
+                if (list.title === currentList.title) {
+                    let listCopy = { ...list };
+                    const taskListSource = listCopy[source.droppableId];
+                    taskListSource.splice(source.index, 1);
+                    listCopy = { ...list, [source.droppableId]: taskListSource };
+                        const taskListDestination = listCopy[destination.droppableId];
+                    taskListDestination.splice(destination.index, 0, taskCopy);
+                    listCopy = { ...list, [destination.droppableId]: taskListDestination };
+                    return listCopy;
+                } else{ 
+                    return list;
+                }
+            })
+        );
+     }, [lists, setLists, currentList]); 
 
     return (
         <div className='task-box'>
@@ -38,6 +61,7 @@ const TaskBox = ({ lists, setLists, currentList, setCurrentList}) => {
             {'\u{1F5D1} Remove this List'}
             </button>
           </header>
+          <DragDropContext onDragEnd={(result) => handleDragEnd(result)}>
             <div className='task-box-body'>
             {
                 ['To Do', 'In Progress', 'Done'].map(tag => (
@@ -51,6 +75,7 @@ const TaskBox = ({ lists, setLists, currentList, setCurrentList}) => {
                 ))
             }
             </div>
+          </DragDropContext>
         </div>
       );
 

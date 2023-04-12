@@ -61,27 +61,45 @@ const Column = ({ tag, lists, setLists, currentList }) => {
         })
       );
   };
-  
+
   return (
     <div className='column'>
       {tag}
       <AddTaskButton handleClick={handleAdd} />
+      <Droppable droppableId={tag}>
+        {(provided) => {
+          return (
             <div
               className='task-container'
+              ref={provided.innerRef}
+              {...provided.droppableProps}
             >
             {lists
               .find((list) => list.title === currentList.title)
               ?.[tag].map((task, index) => (
-                <Task
-                  key={task.id}
-                  name = {task.name}
-                  details = {task.details}
-                  id = {task.id}
-                  handleRemove = {handleRemove}
-                  handleEdit =  {handleEdit} 
-                />
+                <Draggable 
+                  key={task.id} 
+                  draggableId={task.id} 
+                  index={index}
+                >
+                  {(provided, snapshot) => (
+                    <Task
+                      name = {task.name}
+                      details = {task.details}
+                      id = {task.id}
+                      provided = {provided}
+                      snapshot = {snapshot}
+                      handleRemove = {handleRemove}
+                      handleEdit =  {handleEdit} 
+                    />
+                  )}
+                </Draggable>
               ))}
+            {provided.placeholder}
             </div>
+          );
+        }}
+      </Droppable>
     </div>
   );
 };
