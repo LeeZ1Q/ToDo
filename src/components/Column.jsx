@@ -2,7 +2,7 @@ import Task from './Task';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import uuid from 'react-uuid';
 
-const Column = ({ tag, lists, setLists, currentList  }) => {
+const Column = ({ tag, lists, setLists, currentList }) => {
   const handleAdd = () => {
     const name = prompt('Enter the task name:');
     const details = prompt('Enter details:');
@@ -40,7 +40,28 @@ const Column = ({ tag, lists, setLists, currentList  }) => {
       })
     );
   };
-
+  const handleEdit = (id) => {
+    const name = prompt('Edit the task name:');
+    const details = prompt('Edit details:');
+    if (!(name && details)) return;
+      setLists((prev) =>
+        prev.map((list) => {
+          if (list.title === currentList.title) {
+            const taskList = list[tag];
+            const index = taskList.findIndex((item) => item.id === id);
+            taskList.splice(index, 1, {
+              name: name,
+              id: id,
+              details: details,
+            });
+            return { ...list, [tag]: [...taskList] };
+          } else {
+            return list;
+          }
+        })
+      );
+  };
+  
   return (
     <div className='column'>
       {tag}
@@ -56,7 +77,8 @@ const Column = ({ tag, lists, setLists, currentList  }) => {
                   name = {task.name}
                   details = {task.details}
                   id = {task.id}
-                  handleRemove={handleRemove}
+                  handleRemove = {handleRemove}
+                  handleEdit =  {handleEdit} 
                 />
               ))}
             </div>
