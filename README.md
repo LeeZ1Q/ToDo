@@ -1,6 +1,6 @@
 # ToDo -With React
 
-<p align="center"><img src = './todo.svg'style="zoom:80%;" /></p>
+<p align="center"><img src = './public/todo.svg'style="zoom:80%;" /></p>
 
 ## Features
 
@@ -10,7 +10,7 @@
 
 ## Screenshot
 
-![todo](/todopic.png)
+![todo](./public/todopic.png)
 ## Dependencies
 
 - React
