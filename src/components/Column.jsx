@@ -6,7 +6,7 @@ const Column = ({ tag, lists, setLists, currentList }) => {
   const handleAdd = () => {
     const name = prompt('Enter the task name:');
     const details = prompt('Enter details:');
-    if (!(name && details)) return;
+    if (!(name)) return;
     setLists((prev) => {
       const arrCopy = [...prev];
       const index = prev.findIndex(

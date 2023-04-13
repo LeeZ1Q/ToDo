@@ -22,6 +22,29 @@ const ListBar = ({ lists, setLists, currentList, setCurrentList}) => {
           },
         ]);
     }, [lists, setLists]);
+
+    //rename list
+    const handleEdit = useCallback(() => {
+      const title = prompt('Rename the Title');
+      //prevent duplicated title
+      if(
+        lists.find((list) => list.title.toLowerCase() === title.toLowerCase())
+      ){
+        alert('List Already Exists');
+        return;
+      }
+      //rename list
+      if(title)
+        setLists((prev) => {
+          const newList = prev.map((list) => {
+            if(list.title === currentList.title){
+              return {...list, title};
+            }
+            return list;
+          });
+          return newList;
+        });
+    }, [lists, setLists, currentList]);
   
     return (
       <div className='list-bar'>
@@ -29,14 +52,17 @@ const ListBar = ({ lists, setLists, currentList, setCurrentList}) => {
           <img className='list-bar-logo' src = '/todo.svg'></img>
           ToDo
         </h1>
-        <AddlistButton handleClick ={handleAdd} />
+        <AddlistButton 
+          handleClick ={handleAdd} 
+          handleDoubleClick = {handleEdit}
+        />
         <div className='list-container'>
           {lists.map((list) => (
             <div
               key = {list.title}
-              className={`list over-hide ${currentList.title === list.title ? 'selected-list' : ''
-                }`}
+              className={`list over-hide ${currentList.title === list.title ? 'selected-list' : ''}`}
               onClick={() => setCurrentList(list)}
+              onDoubleClick={() => handleEdit(list.title)}
             >
               {list.title}
             </div>
@@ -46,9 +72,12 @@ const ListBar = ({ lists, setLists, currentList, setCurrentList}) => {
     );
   };
   
-  const AddlistButton = ({handleClick}) => {
+  const AddlistButton = ({handleClick, handleDoubleClick }) => {
     return (
-      <div className='add-button' onClick={handleClick}>
+      <div className='add-button' 
+        onClick={handleClick} 
+        onDoubleClick={handleDoubleClick}
+      >
         +
       </div>
     );

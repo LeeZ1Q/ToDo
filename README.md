@@ -4,7 +4,7 @@
 
 ## Features
 
-- [x] **Draggable**
+- [x] **Task Draggable**
 - [x] **Editable**
 - [x] **Use Local Storage**
 
@@ -20,4 +20,5 @@
 ## Todo
 
 - [ ] *Adapted to mobile*
+- [ ] *List Draggable*
 - [ ] *flickering due to bug of react-beautiful-dnd*
