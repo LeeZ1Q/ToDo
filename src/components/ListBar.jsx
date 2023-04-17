@@ -42,9 +42,16 @@ const ListBar = ({ lists, setLists, currentList, setCurrentList}) => {
             }
             return list;
           });
+          //set current list to the renamed list
+          setCurrentList((prev) => ({...prev, title}));
+          //remove selection
+          if (window.getSelection) {
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+          }
           return newList;
         });
-    }, [lists, setLists, currentList]);
+    }, [lists, setLists, currentList,setCurrentList]);
   
     return (
       <div className='list-bar'>

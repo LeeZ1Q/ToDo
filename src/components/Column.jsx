@@ -43,7 +43,7 @@ const Column = ({ tag, lists, setLists, currentList }) => {
   const handleEdit = (id) => {
     const name = prompt('Edit the task name:');
     const details = prompt('Edit details:');
-    if (!(name && details)) return;
+    if (!(name)) return;
       setLists((prev) =>
         prev.map((list) => {
           if (list.title === currentList.title) {
